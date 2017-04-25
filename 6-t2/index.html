@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<title>Sort a HTML Table</title>
+<body>
+
+
+
+<table border="1" id="myTable">
+  <tr>
+    <th onclick="sortTable(0)">Companie</th>
+    <th onclick="sortTable(1)">Model</th>
+    <th onclick="sortTable(2)">Sistem Operare</th> 
+  </tr>
+  <tr>
+    <td>Samsung</td>
+    <td>5</td>
+    <td>Android 9</td>
+  </tr>
+  <tr>
+    <td>Apple</td>
+    <td>50</td>
+    <td>I0S 10.3</td>
+  </tr>
+  <tr>
+    <td>Nokia</td>
+    <td>76</td>
+    <td>Symbian 6</td>
+  </tr>
+  <tr>
+    <td>HTC</td>
+    <td>9</td>
+    <td>Android 5.1</td>
+  </tr>
+  <tr>
+    <td>HTC</td>
+    <td>3</td>
+    <td>Android 1</td>
+  </tr>
+  <tr>
+    <td>DEll</td>
+    <td>6</td>
+    <td>Cash 5</td>
+  </tr>
+  <tr>
+     <td>Apple</td>
+    <td>40</td>
+    <td>I0S 4.3</td>
+  </tr>
+  <tr>
+     <td>Apple</td>
+    <td>5</td>
+    <td>I0S 4</td>
+  </tr>
+</table>
+
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;      
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>

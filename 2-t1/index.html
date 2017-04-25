@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Javra script</title>
+</head>
+
+<body style="background-color:black">
+
+<div id = "container">
+    <table>
+        <td>
+        <tr>
+            <td style="color:red">
+            Optiuni :
+                <td>
+        </tr>
+        <tr>
+            <td>
+            <input type = "button" value = "-" onclick="decrease()"><font color = "Blue">Numar fulgi</font>
+            <input type = "button" value = "+" onclick="increase()">
+                <td>
+        </tr>
+        <tr>
+            <td>
+            <input type = "button" value = "-" onclick="viteza = viteza - 1"><font color = "green">Velocity</font>
+            <input type = "button" value = "+" onclick="viteza = viteza + 1">
+            <td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    
+var viteza = 10;
+var interval = 160;
+var count = 0 ;
+var  nrOfSnowFlakes = 0;
+
+function snowflake(){
+	var imgs = document.createElement('img');
+	imgs.src = 'fulg.jpg';
+	imgs.style.position = 'relative';
+	imgs.style.left = viteza*Math.floor((Math.random() * 80) + 1)+'px';
+	var lefte = imgs.style.left;
+	imgs.style.width = '30px';
+	imgs.style.width = '40px';
+	imgs.style.top = '0px';
+	var container = document.getElementById('container');
+	container.appendChild(imgs);
+	count = count + 1
+	var render = function(){
+		var x = parseInt(imgs.style.top)
+		if(x >=800){
+			imgs.style.top = '0px'
+			imgs.style.left = lefte;
+		}
+		else{
+			imgs.style.left = parseInt(imgs.style.left) + Math.floor((Math.random() * 5) + 1)+'px';
+			imgs.style.right =  parseInt(imgs.style.right)+ Math.floor((Math.random() * 5) + 1)+'px';
+			imgs.style.top = viteza+x+ 1+'px';
+	       }
+    }
+	var callback = setInterval(render,interval);
+
+}
+function increase(){
+	new snowflake();
+}
+function decrease(){
+	var imgs  = document.images;
+	imgs[0].parentNode.removeChild(imgs[0]);
+}
+snowflake();
+</script>
